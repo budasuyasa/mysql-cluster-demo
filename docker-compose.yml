@@ -16,13 +16,13 @@ services:
       --binlog_format=ROW
       --gtid_mode=ON
       --enforce-gtid-consistency=ON
+      --mysql-native-password=ON
     ports:
       - "3307:3306"
     networks:
       - appku-net
     volumes:
       - ./custom.cnf:/etc/mysql/conf.d/mysql.cnf
-      - ./create_remote_user.sql:/docker-entrypoint-initdb.d/mysql-init.sql
 
   slave1:
     image: mysql:8
@@ -39,6 +39,7 @@ services:
       --read-only=ON
       --gtid_mode=ON
       --enforce-gtid-consistency=ON
+      --mysql-native-password=ON
     ports:
       - "3308:3306"
     depends_on:
@@ -47,7 +48,6 @@ services:
       - appku-net
     volumes:
       - ./custom.cnf:/etc/mysql/conf.d/mysql.cnf
-      - ./create_remote_user.sql:/docker-entrypoint-initdb.d/mysql-init.sql
   slave2:
     image: mysql:8
     container_name: bdl-slave2
@@ -63,6 +63,7 @@ services:
       --read-only=ON
       --gtid_mode=ON
       --enforce-gtid-consistency=ON
+      --mysql-native-password=ON
     ports:
       - "3309:3306"
     depends_on:
@@ -71,7 +72,6 @@ services:
       - appku-net
     volumes:
       - ./custom.cnf:/etc/mysql/conf.d/mysql.cnf
-      - ./create_remote_user.sql:/docker-entrypoint-initdb.d/mysql-init.sql
 
 networks:
   appku-net:
