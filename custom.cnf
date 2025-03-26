@@ -1,0 +1,4 @@
+[mysqld]
+# Untuk kebutuhan latiha, kita akan membuat mysql untuk 
+# membukan koneksi dari host manapun
+bind-address = 0.0.0.0
